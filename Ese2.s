@@ -14,15 +14,30 @@ _start:
         int  $0x80                                                                 
         # sys_write                                                                
                                                                                    
-        movl $0x3 , %eax                                                           
-        movl $0x0,  %ebx                                                           
-        movl $                                                                     
-                                                                                   
-                                                                                   
-                                                                                   
-        movl $0x1, %eax                                                            
-        int $0x80                                                                  
-        # sys_exit                                                                 
+        movl $0x3,  %eax
+        movl $0x0,  %ebx
+        movl $var1, %ecx
+        movl $0x3,  %edx
+        int $0x80
+        # sys_read
+
+        movl var1, %eax
+        andl $0x00909, %eax
+        shrl $0x10, %eax
+
+        movl $0x0, %ebx
+        movl $0x0, %edx
+        
+        movl $10, %ecx
+        movb $al, $dl
+        imul %ecx, %edx, %ebx
+
+        mov %ah, %dl
+        add %edx, $ebx
+
+        movl $0x1, %eax
+        int $0x80
+        # sys_exit
                                                                                    
 .data                                                                              
                                                                                    
